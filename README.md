@@ -1,16 +1,15 @@
 # mis_lab2
 
-A new Flutter project.
+Home page screen:
+<img width="372" height="752" alt="image" src="https://github.com/user-attachments/assets/79846107-2028-4d5c-bbfd-e851d684d0c7" />
 
-## Getting Started
+Meals page screen:
+<img width="361" height="745" alt="image" src="https://github.com/user-attachments/assets/82d18167-2ecf-49f8-ae55-9fb1e68b0609" />
 
-This project is a starting point for a Flutter application.
+Meal details screen:
+<img width="378" height="759" alt="image" src="https://github.com/user-attachments/assets/1e0fff4e-7b47-461e-8cc7-9c1743e73a48" />
 
-A few resources to get you started if this is your first Flutter project:
+Random meal screen:
+<img width="378" height="748" alt="image" src="https://github.com/user-attachments/assets/59279192-74f9-4e94-8938-747bc175a759" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
