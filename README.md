@@ -1,16 +1,16 @@
-# mis_lab2
+# mis_lab3
 
-A new Flutter project.
+Почетен екран со копче омилени
+<img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/869f6897-be62-4d8b-9256-611c5f4e2eed" />
 
-## Getting Started
+Екран со омилени јадења
+<img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/1054611a-0e01-4963-b44a-0472527e2ad8" />
 
-This project is a starting point for a Flutter application.
+Нотификација
+<img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/ae4e9248-ac07-4f3d-bb7d-3840e05054a7" />
 
-A few resources to get you started if this is your first Flutter project:
+Екран при клик на нотификација
+![Uploading image.png…]()
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
