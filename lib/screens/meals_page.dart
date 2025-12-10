@@ -5,8 +5,13 @@ import '../models/meal.dart';
 
 class MealsPage extends StatefulWidget {
   final String category;
+  final Function(Meal) onAddToFavorites;
 
-  const MealsPage({super.key, required this.category});
+  const MealsPage({
+    super.key,
+    required this.category,
+    required this.onAddToFavorites,
+  });
 
   @override
   State<MealsPage> createState() => _MealsPageState();
@@ -38,6 +43,17 @@ class _MealsPageState extends State<MealsPage> {
           .where((m) => m.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
+  }
+
+  void addToFavorites(Meal meal) {
+    widget.onAddToFavorites(meal);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("${meal.name} e додадено во омилени"),
+        duration: const Duration(seconds: 1),
+      ),
+    );
   }
 
   Future<void> searchMealsOnline(String query) async {
@@ -81,7 +97,6 @@ class _MealsPageState extends State<MealsPage> {
               ),
               onChanged: (query) {
                 filterLocalMeals(query);
-
                 searchMealsOnline(query);
               },
             ),
@@ -104,7 +119,7 @@ class _MealsPageState extends State<MealsPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => MealDetailsPage(mealId: meal.id),
+                        builder: (_) => MealDetailsPage(mealId: meal.id),
                       ),
                     );
                   },
@@ -126,6 +141,29 @@ class _MealsPageState extends State<MealsPage> {
                             textAlign: TextAlign.center,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orangeAccent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                            ),
+                            onPressed: () => addToFavorites(meal),
+                            child: const Text(
+                              "Додади во омилени",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ],

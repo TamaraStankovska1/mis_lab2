@@ -4,6 +4,8 @@ import 'dart:convert';
 import '../screens/meals_details_page.dart';
 
 class RandomMealPage extends StatefulWidget {
+  const RandomMealPage({super.key});
+
   @override
   State<RandomMealPage> createState() => _RandomMealPageState();
 }

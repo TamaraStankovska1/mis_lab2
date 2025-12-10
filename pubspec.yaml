@@ -13,6 +13,19 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.5.0
   url_launcher: ^6.3.0
+  firebase_core: ^4.2.1
+  firebase_messaging: 16.0.4
+  permission_handler: ^11.3.1
+
+  flutter_local_notifications:
+    git:
+      url: https://github.com/MaikuB/flutter_local_notifications.git
+      path: flutter_local_notifications
+
+  cloud_firestore: ^6.1.0
+  firebase_auth: ^6.1.2
+
+  timezone: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

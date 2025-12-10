@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:mis_lab2/screens/favorite_meals.dart';
 import 'package:mis_lab2/screens/meals_page.dart';
 import '../services/meal_service.dart';
 import '../models/category.dart';
 import '../screens/random_meal.dart';
+import '../models/meal.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,10 +18,13 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Category>> categoriesFuture;
   List<Category> allCategories = [];
   List<Category> filtered = [];
+  List<Meal> favoriteMeals = [];
 
   @override
   void initState() {
     super.initState();
+    _getFirebaseMessagingToken();
+
     categoriesFuture = MealApiService().fetchCategories();
     categoriesFuture.then((value) {
       setState(() {
@@ -26,6 +32,36 @@ class _HomePageState extends State<HomePage> {
         filtered = value;
       });
     });
+
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      if (message != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => RandomMealPage()),
+        );
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => RandomMealPage()),
+      );
+    });
+  }
+
+  void _getFirebaseMessagingToken() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    await messaging.getToken();
   }
 
   void filterCategories(String query) {
@@ -72,8 +108,7 @@ class _HomePageState extends State<HomePage> {
                         hintText: "Најди категорија",
                         border: InputBorder.none,
                         prefixIcon: const Icon(Icons.search),
-                        contentPadding:
-                        const EdgeInsets.symmetric(vertical: 12),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 12),
                       ),
                       onChanged: filterCategories,
                     ),
@@ -111,6 +146,37 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: SizedBox(
+              width: double.infinity,
+              height: 45,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          FavoriteMealPage(favoriteMeals: favoriteMeals),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.favorite, color: Colors.white),
+                label: const Text(
+                  "Омилени",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: FutureBuilder<List<Category>>(
               future: categoriesFuture,
@@ -138,8 +204,16 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) =>
-                                MealsPage(category: category.name),
+                            builder: (_) => MealsPage(
+                              category: category.name,
+                              onAddToFavorites: (meal) {
+                                setState(() {
+                                  if (!favoriteMeals.contains(meal)) {
+                                    favoriteMeals.add(meal);
+                                  }
+                                });
+                              },
+                            ),
                           ),
                         );
                       },
