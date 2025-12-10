@@ -10,7 +10,7 @@
 <img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/ae4e9248-ac07-4f3d-bb7d-3840e05054a7" />
 
 Екран при клик на нотификација
-![Uploading image.png…]()
+<img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/f92da1ee-6ad1-47f6-9722-5597bc027f3e" />
 
 
 
